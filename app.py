@@ -1,6 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for
+import psycopg2
 
 app = Flask(__name__)
+
+conn = psycopg2.connect(
+    dbname='b1mxnbtfaytwhs4af34m',
+    user='uwj8p4v8zuoeyv3iqlxg',
+    password='Kh3N5D3JtxcCyJeXuUeeZVNCROL6Jo',
+    host="b1mxnbtfaytwhs4af34m-postgresql.services.clever-cloud.com",
+    port=50013
+)
 
 users = {
     'john': 'password123',
@@ -42,6 +51,24 @@ def create_ad():
 @app.route('/success')
 def success():
     return 'Inzerát bol úspešne vytvorený!'
+
+
+rides = [
+    {'from_location': 'Bratislava', 'to_location': 'Košice', 'date': '2024-07-01'},
+    {'from_location': 'Žilina', 'to_location': 'Banská Bystrica', 'date': '2024-07-02'}
+]
+
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        from_location = request.form.get('from_location')
+        to_location = request.form.get('to_location')
+        filtered_rides = [ride for ride in rides if
+                          from_location.lower() in ride['from_location'].lower() and
+                          to_location.lower() in ride['to_location'].lower()]
+        return render_template('search.html', rides=filtered_rides)
+    return render_template('search.html', rides=rides)
 
 
 if __name__ == '__main__':

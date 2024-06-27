@@ -3,21 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vytváranie inzerátov</title>
+    <title>Pridaj cestu</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
 <body>
-    <h1>Vytváranie inzerátov</h1>
+    <h1>Pridaj cestu:</h1>
     <form method="POST" action="{{ url_for('create_ad') }}">
-        <label for="route">Trasa:</label>
-        <input type="text" id="route" name="route" required>
-        <br>
-        <label for="time">Čas:</label>
-        <input type="text" id="time" name="time" required>
-        <br>
-        <label for="conditions">Podmienky:</label>
-        <textarea id="conditions" name="conditions" rows="4" required></textarea>
-        <br>
+        <input type="text" name="trasa" placeholder="From">
+        <input type="text" name="trasa" placeholder="To">
+        <input type="text" name="cas" placeholder="Date">
+        <input type="text" name="podmienky" placeholder="Notes">
         <input type="submit" value="Vytvoriť inzerát">
     </form>
 </body>
