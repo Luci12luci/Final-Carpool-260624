@@ -71,5 +71,10 @@ def search():
     return render_template('search.html', rides=rides)
 
 
+@app.route('/about')
+def about():
+    about_info = about.query.first()
+    return render_template('about.html', about_info=about_info)
+
 if __name__ == '__main__':
     app.run(debug=True)
